@@ -29,6 +29,14 @@ resource "aws_instance" "nextcloud" {
   ami           = "ami-09b0a86a2c84101e1" # Ubuntu 22 LTS AMI
   instance_type = "t3a.small"             # "t2.micro"
 
+  metadata_options {
+    http_tokens = "required"
+  }
+
+  root_block_device {
+    encrypted = true
+  }
+
   subnet_id                   = aws_subnet.nextcloud_subnet_a.id
   security_groups             = [aws_security_group.nextcloud_sg.id]
   key_name                    = var.nextcloud_key_pair_name

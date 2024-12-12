@@ -5,6 +5,7 @@ resource "aws_ebs_volume" "nextcloud_ebs" {
   tags = {
     Name = "Nextcloud-Storage"
   }
+  encrypted = true
 }
 
 # Attach the EBS volume to the Nextcloud instance

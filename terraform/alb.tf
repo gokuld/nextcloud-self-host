@@ -1,4 +1,5 @@
 # Create the ALB
+#trivy:ignore:AVD-AWS-0053 # expose ALB publicly, that's fine.
 resource "aws_lb" "nextcloud_alb" {
   name               = "nextcloud-alb"
   internal           = false
@@ -8,6 +9,7 @@ resource "aws_lb" "nextcloud_alb" {
 
   enable_deletion_protection       = false
   enable_cross_zone_load_balancing = true
+  drop_invalid_header_fields       = true
 }
 
 resource "aws_lb_listener" "http_listener" {
