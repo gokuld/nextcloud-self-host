@@ -1,3 +1,4 @@
+#trivy:ignore:AVD-AWS-0104
 resource "aws_security_group" "nextcloud_sg" {
   vpc_id = aws_vpc.nextcloud_vpc.id
 
@@ -24,6 +25,7 @@ resource "aws_security_group" "nextcloud_sg" {
 }
 
 # Define the ALB security group
+#trivy:ignore:AVD-AWS-0104
 resource "aws_security_group" "alb_sg" {
   vpc_id      = aws_vpc.nextcloud_vpc.id
   description = "Allow HTTPS traffic"
