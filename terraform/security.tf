@@ -3,10 +3,13 @@ resource "aws_security_group" "nextcloud_sg" {
   vpc_id = aws_vpc.nextcloud_vpc.id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+    cidr_blocks = [
+      aws_subnet.nextcloud_subnet_a.cidr_block,
+      aws_subnet.nextcloud_subnet_b.cidr_block
+    ]
   }
 
   ingress {
