@@ -51,7 +51,7 @@ resource "aws_instance" "nextcloud" {
   }
 
   # Attach IAM role to EC2 instance
-  iam_instance_profile = aws_iam_instance_profile.nextcloud_s3_profile.name
+  iam_instance_profile = aws_iam_instance_profile.nextcloud_ec2_server_profile.name
 
   user_data = <<-EOF
               #!/bin/bash
@@ -110,6 +110,7 @@ resource "aws_flow_log" "nextcloud" {
   log_destination_type = "cloud-watch-logs"
   traffic_type         = "ALL"
   vpc_id               = aws_vpc.nextcloud_vpc.id
+  iam_role_arn         = aws_iam_role.nextcloud_ec2_server_role.arn
 
   tags = {
     Name = "nextcloud-flow-log"
