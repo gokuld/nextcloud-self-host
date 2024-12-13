@@ -12,6 +12,7 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_PASSWORD=secret
+      - OVERWRITEPROTOCOL=https
       # use S3 bucket as external storage
       - OBJECTSTORE_CLASS=\\OC\\Files\\ObjectStore\\S3
       - OBJECTSTORE_BUCKET=${bucket_name}
