@@ -37,10 +37,9 @@ resource "aws_instance" "nextcloud" {
     encrypted = true
   }
 
-  subnet_id                   = aws_subnet.nextcloud_subnet_a.id
-  security_groups             = [aws_security_group.nextcloud_sg.id]
-  key_name                    = var.nextcloud_key_pair_name
-  associate_public_ip_address = true
+  subnet_id       = aws_subnet.nextcloud_subnet_a.id
+  security_groups = [aws_security_group.nextcloud_sg.id]
+  key_name        = var.nextcloud_key_pair_name
 
   tags = {
     Name = "Nextcloud-Server"
@@ -90,11 +89,6 @@ resource "aws_route53_record" "nextcloud_dns" {
     zone_id                = aws_lb.nextcloud_alb.zone_id
     evaluate_target_health = true
   }
-}
-
-# Outputs
-output "nextcloud_public_ip" {
-  value = aws_instance.nextcloud.public_ip
 }
 
 output "nextcloud_url" {
