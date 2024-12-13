@@ -29,6 +29,11 @@ resource "aws_instance" "nextcloud" {
   ami           = "ami-09b0a86a2c84101e1" # Ubuntu 22 LTS AMI
   instance_type = "t3a.small"             # "t2.micro"
 
+  depends_on = [
+    aws_s3_bucket.nextcloud_s3_bucket,
+    aws_ebs_volume.nextcloud_ebs
+  ]
+
   metadata_options {
     http_tokens = "required"
   }
