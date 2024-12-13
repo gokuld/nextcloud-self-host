@@ -59,3 +59,10 @@ resource "aws_lb_target_group" "nextcloud_target_group" {
     unhealthy_threshold = 3
   }
 }
+
+# Register the EC2 instance with the target group
+resource "aws_lb_target_group_attachment" "nextcloud_attachment" {
+  target_group_arn = aws_lb_target_group.nextcloud_target_group.arn
+  target_id        = aws_instance.nextcloud.id
+  port             = 80
+}
