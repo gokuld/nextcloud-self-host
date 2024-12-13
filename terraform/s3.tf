@@ -10,11 +10,14 @@ resource "aws_s3_bucket" "nextcloud_s3_bucket" {
   tags = {
     Name = "Nextcloud-S3-Storage"
   }
+}
 
-  versioning {
-    enabled = true
+resource "aws_s3_bucket_versioning" "nextcloud_s3_versioning" {
+  bucket = aws_s3_bucket.nextcloud_s3_bucket.id
+
+  versioning_configuration {
+    status = "Enabled"
   }
-
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "nextcloud_s3_bucket" {
