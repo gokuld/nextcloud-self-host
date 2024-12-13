@@ -104,3 +104,18 @@ output "nextcloud_url" {
 output "docker_compose" {
   value = data.template_file.docker_compose.rendered
 }
+
+resource "aws_flow_log" "nextcloud" {
+  log_destination      = aws_cloudwatch_log_group.nextcloud.arn
+  log_destination_type = "cloud-watch-logs"
+  traffic_type         = "ALL"
+  vpc_id               = aws_vpc.nextcloud_vpc.id
+
+  tags = {
+    Name = "nextcloud-flow-log"
+  }
+}
+
+resource "aws_cloudwatch_log_group" "nextcloud" {
+  name = "/nextcloud/vpc-flow-logs"
+}
